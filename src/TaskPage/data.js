@@ -1,10 +1,10 @@
-export const data = {
+const data = {
   pictures: {
-    redShell: 'assets/img/Koopa_Shell_Spin.webp',
-    star: 'assets/img/star.webp',
-    mushroom: 'assets/img/mushroom.png',
-    coin: 'assets/img/coin.png',
-    greenShell: 'assets/img/koopa_shell.png'
+    redShell: 'Koopa_Shell_Spin.webp',
+    star: 'star.webp',
+    mushroom: 'mushroom.png',
+    coin: 'coin.png',
+    greenShell: 'koopa_shell.png'
   },
   cardElement: function(){
     // return '\
@@ -21,3 +21,5 @@ export const data = {
     `
   }
 }
+
+export default data;

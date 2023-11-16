@@ -1,0 +1,40 @@
+.window{
+  width: 65%;
+  margin: 100px auto 0;
+  display: flex;
+  border: 1px black solid;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputField{
+  display: flex;
+  gap: 20px;
+}
+
+button.nes-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-field *{
+  flex: 1;
+}
+
+img.icon{
+  width: 32px;
+  height: 32px;
+}
+#card-container > .nes-container{
+  min-width: 500px;
+}
+
+.background-done{
+  background-color: rgb(243, 243, 101);
+}

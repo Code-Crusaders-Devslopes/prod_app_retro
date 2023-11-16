@@ -7,6 +7,8 @@ const HomePage = () => {
       <div>Yes, let's</div>
       <div>now.</div>
       <div><a href="/taskPage">Click here</a></div>
+      <a href="/sticky-note">Sticky Note</a>
+
     </>
   );
 };

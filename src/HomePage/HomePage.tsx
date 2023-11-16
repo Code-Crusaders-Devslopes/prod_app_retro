@@ -1,6 +1,6 @@
 const HomePage = () => {
   return (
-
+    
     // add javascript here
     <>
       <div>Shall we Play a Game?</div>

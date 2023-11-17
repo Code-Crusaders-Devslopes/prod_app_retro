@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage/HomePage";
 import TaskPage from "./TaskPage/TaskPage";
 import StickyNote from "./StickyNote/StickyNote";
-
+import TaskPage from "./TaskPage/TaskPage";
 
 function App() {
   return (

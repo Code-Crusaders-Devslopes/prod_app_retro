@@ -93,3 +93,8 @@ body{
   background-image: url('background.jpg');
   position: center;
 }
+
+.title{
+  font-size: 42px;
+  font-weight: bold;
+}

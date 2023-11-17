@@ -43,10 +43,13 @@ const TaskPage = () => {
 
   const completeT = async (id: any) => {
     try {
-      await completeTask(id);
-      const audio = new Audio(oneUp);
-      audio.play();
-      setTasks(tasks.map((task: any) => task.id === id ? {...task, completed: true} : task))
+      const taskToComplete = tasks.find((task: any) => task.id === id);
+      if (taskToComplete) {
+        await completeTask(id);
+        const audio = new Audio(oneUp);
+        audio.play();
+        setTasks(tasks.map((task: any) => task.id === id ? { ...task, completed: !task.completed } : task));
+      }
     } catch (e) {
       console.log(e);
     }
@@ -81,8 +84,9 @@ const TaskPage = () => {
 
   return (
     <>
-      <div className={`${style.backgroundColorWhite} + nes-container`}>
-        <div>Memento Mori</div>
+      <div className={`${style.backgroundColorWhite} nes-container with-title`}>
+        <h2 className={`${style.title} title`}>Memento Mori</h2>
+        <p>Enter a task</p>
         <div>
           <a onMouseOver={mouseOver} onMouseOut={mouseOut} href="/">
             Home

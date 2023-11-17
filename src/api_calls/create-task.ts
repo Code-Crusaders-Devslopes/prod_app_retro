@@ -7,11 +7,10 @@ type Task = {
 };
 
 export const createTask = async (task: Task) => {
-  const { data, error } = await supabase.from('tasks').insert(task);
+  const { error } = await supabase.from('tasks').insert(task);
 
-  if (data) {
-    return data;
+  if (error) {
+    return error?.message;
+    
   }
-
-  return error?.message;
 };

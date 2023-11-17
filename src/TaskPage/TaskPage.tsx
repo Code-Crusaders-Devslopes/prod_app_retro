@@ -16,10 +16,10 @@ const TaskPage = () => {
 
   const [tasks, setTasks] = useState<any>([]);
   const [currentTask, setCurrentTask] = useState<any>([]);
-    
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+
+  // useEffect(() => {
+  //   fetchTasks();
+  // }, []);
 
   const fetchTasks = () => {
     try {
@@ -32,17 +32,17 @@ const TaskPage = () => {
   };
 
 
-  const createT = (value: any) => {
+  const createT = async () => {
     try {
-      createTask(value);
+      await createTask(currentTask);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const completeT = (value: any) => {
+  const completeT = (id: any) => {
     try {
-      completeTask(value);
+      completeTask(id);
       const audio = new Audio(oneUp);
       audio.play();
     } catch (e) {
@@ -64,7 +64,9 @@ const TaskPage = () => {
     // put functionality here
       const audio = new Audio(coinSound);
     audio.play();
-    createT(currentTask);
+    createT();
+    fetchTasks();
+  
   };
 
 
@@ -84,15 +86,15 @@ const TaskPage = () => {
           <div className={style.window}>
             <div className={style.main}>
               <div className={style.inputField}>
-                <input onChange={(e) => setInput(e.target.value)} type="text" id="input-box" className={`${style.maxWidthOut} ${style.alignItems} nes.nes-input`}></input>
-                <button onClick={() => handleClick()} type="button" id="add" className={`${style.flexRow} ${style.justifyContent} nes-btn is-primary`}>
+                <input onChange={(e) => setCurrentTask(e.target.value)} type="text" id="input-box" className={`${style.maxWidthOut} ${style.alignItems} nes.nes-input`}></input>
+                <button onClick={() => handleTaskAdd()} type="button" id="add" className={`${style.flexRow} ${style.justifyContent} nes-btn is-primary`}>
                   <p>Add</p> <i className='nes-icon coin'></i>
                 </button>
               </div>
               <img src="Koopa_Shell_Spin.webp" alt="" className={style.icon} />
               <div id="card-container">
                 {tasks.map((x:any) =>
-                  <div className={style.icon + 'nes-container'}>
+                  <div className={`${x.completed ? style.backgroundColorYellow : null} style.icon + 'nes-container'`}>
                     <p>{x.task}</p>
                     <span><img src="Koopa_Shell_Spin.webp" alt="delete" className={style.icon} onClick={()=> deleteTask()}/></span>
                     <span><img src="mushroom.png" alt="complete" className={style.icon} onClick={completeTask}/></span>
@@ -105,3 +107,5 @@ const TaskPage = () => {
       </>
   );
 };
+
+export default TaskPage;

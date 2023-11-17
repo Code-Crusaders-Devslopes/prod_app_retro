@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { completeTask } from '../api_calls/complete-task';
+import { createTask } from '../api_calls/create-task';
+import { deleteTask } from '../api_calls/delete-task';
 import { getTasks } from '../api_calls/get-tasks';
 import style from './taskPage.module.css';
 import { useEffect, useState } from 'react';
@@ -22,7 +25,7 @@ export const TaskPage = () => {
     }
   };
 
-  const createTask = (value: any) => {
+  const createT = (value: any) => {
     try {
       createTask(value);
     } catch (e) {
@@ -30,7 +33,7 @@ export const TaskPage = () => {
     }
   };
 
-  const completeTask = (value: any) => {
+  const completeT = (value: any) => {
     try {
       completeTask(value);
     } catch (e) {
@@ -38,7 +41,7 @@ export const TaskPage = () => {
     }
   };
 
-  const deleteTask = (value: any) => {
+  const deleteT = (value: any) => {
     try {
       deleteTask(value);
     } catch (e) {
@@ -46,9 +49,9 @@ export const TaskPage = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleTaskAdd = () => {
     // put functionality here
-    createTask(currentTask);
+    createT(currentTask);
   };
 
   return (
@@ -67,7 +70,7 @@ export const TaskPage = () => {
               className="nes.nes-input"
             ></input>
             <button
-              onClick={() => handleClick()}
+              onClick={() => handleTaskAdd()}
               type="button"
               id="add"
               className="nes-btn is-primary"

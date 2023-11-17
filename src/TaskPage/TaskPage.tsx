@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 const TaskPage = () => {
   const [tasks, setTasks] = useState<any>([]);
   const [currentTask, setCurrentTask] = useState<any>([]);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     fetchTasks();
@@ -32,7 +33,7 @@ const TaskPage = () => {
     }
   };
 
-  const createT = async (value) => {
+  const createT = async (value: any) => {
     try {
       await createTask(value);
     } catch (e) {
@@ -40,21 +41,23 @@ const TaskPage = () => {
     }
   };
 
-  const completeT = (id: any) => {
+  const completeT = async (id: any) => {
     try {
-      completeTask(id);
+      await completeTask(id);
       const audio = new Audio(oneUp);
       audio.play();
+      setTasks(tasks.map((task: any) => task.id === id ? {...task, completed: true} : task))
     } catch (e) {
       console.log(e);
     }
   };
 
-  const deleteT = (value: any) => {
+  const deleteT = async (value: any) => {
     try {
       deleteTask(value);
       const audio = new Audio(stomp);
       audio.play();
+      setTasks(tasks.filter((task: any) => task.id !== value));
     } catch (e) {
       console.log(e);
     }
@@ -79,7 +82,7 @@ const TaskPage = () => {
   return (
     <>
       <div className={`${style.backgroundColorWhite} + nes-container`}>
-        <div>To do List</div>
+        <div>Memento Mori</div>
         <div>
           <a onMouseOver={mouseOver} onMouseOut={mouseOut} href="/">
             Home
@@ -108,8 +111,8 @@ const TaskPage = () => {
               {tasks.map((x: any) => (
                 <div
                   className={`${
-                    x.completed ? style.backgroundColorYellow : null
-                  } style.icon + 'nes-container'`}
+                    x.completed ? style.backgroundColorYellow : style.backgroundColorWhite
+                  } ${style.icon} nes-container`}
                 >
                   <p>{x.task}</p>
                   <span>
@@ -117,7 +120,7 @@ const TaskPage = () => {
                       src="Koopa_Shell_Spin.webp"
                       alt="delete"
                       className={style.icon}
-                      onClick={() => deleteTask()}
+                      onClick={() => deleteT(x.id)}
                     />
                   </span>
                   <span>
@@ -125,7 +128,7 @@ const TaskPage = () => {
                       src="mushroom.png"
                       alt="complete"
                       className={style.icon}
-                      onClick={completeTask}
+                      onClick={() => completeT(x.id)}
                     />
                   </span>
                 </div>

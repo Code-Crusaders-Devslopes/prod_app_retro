@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import style from './taskPage.module.css';
-// import stomp from '../../public/smb_stomp.wav'
+import stomp from '../../public/smb_stomp.wav'
+import gameOver from '../../public/smb_mariodie.wav';
 import oneUp from '../../public/smb_1-up.wav';
 import { completeTask } from '../api_calls/complete-task';
 import { createTask } from '../api_calls/create-task';
@@ -52,7 +53,7 @@ const TaskPage = () => {
   const deleteT = (value: any) => {
     try {
       deleteTask(value);
-      const audio = new Audio(gameOver);
+      const audio = new Audio(stomp);
       audio.play();
     } catch (e) {
       console.log(e);

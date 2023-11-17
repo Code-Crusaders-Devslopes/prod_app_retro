@@ -1,51 +1,72 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import style from './taskPage.module.css'
 import stomp from '../../public/smb_stomp.wav'
 import oneUp from '../../public/smb_1-up.wav'
+        import { completeTask } from '../api_calls/complete-task';
+import { createTask } from '../api_calls/create-task';
+import { deleteTask } from '../api_calls/delete-task';
+import { getTasks } from '../api_calls/get-tasks';
 // import gameOver from '../../public/smb_gameover.wav'
 import coinSound from '../../public/smb_coin.wav'
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const TaskPage = () => {
 
-  const [tasks, setTasks] = useState<any>([{
-    id: 1,
-    task: "string",
-    complete: true
-  },
-  {
-    id: 2,
-    task: "string2",
-    complete: false
-  }
-]);
-  const [input, setInput] = useState<any>([]);
+  const [tasks, setTasks] = useState<any>([]);
+  const [currentTask, setCurrentTask] = useState<any>([]);
+    
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
-  const handleClick = () =>{
+  const fetchTasks = () => {
+    try {
+      getTasks().then(() => {
+        setTasks(tasks);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
+  const createT = (value: any) => {
+    try {
+      createTask(value);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const completeT = (value: any) => {
+    try {
+      completeTask(value);
+      const audio = new Audio(oneUp);
+      audio.play();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteT = (value: any) => {
+    try {
+      deleteTask(value);
+       const audio = new Audio(gameOver);
+       audio.play();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleTaskAdd = () => {
     // put functionality here
-    const audio = new Audio(coinSound);
+      const audio = new Audio(coinSound);
     audio.play();
-    // add to task list
-  }
+    createT(currentTask);
+  };
 
-  const completeTask = () => {
-    // will play sound and also mark task as complete
-    const audio = new Audio(oneUp);
-    audio.play();
-  }
-
-  const clearAll = () => {
-    // will play sound and also clear all tasks
-    const audio = new Audio(gameOver);
-    audio.play();
-  }
-
-  const deleteTask = () => {
-    // will play sound and also delete the task
-    const audio = new Audio(stomp);
-    audio.play();
-  }
 
   const mouseOver = (e) => {
     e.target.innerText = `WHERE DO YOU THINK YOU'RE GOING?`
@@ -80,10 +101,7 @@ const TaskPage = () => {
               </div>
             </div>
           </div>
-          </div>
-
-    </>
+        </div>
+      </>
   );
 };
-
-export default TaskPage;

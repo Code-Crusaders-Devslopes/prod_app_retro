@@ -1,0 +1,64 @@
+.window{
+  width: 65%;
+  margin: 100px auto 0;
+  display: flex;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.input-field{
+  display: flex;
+  gap: 20px;
+}
+
+button.nes-btn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-field *{
+  flex: 1;
+}
+
+img.icon{
+  width: 32px;
+  height: 32px;
+}
+
+#card-container{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nes-container{background-color: white;}
+
+#card-container{
+  width: 625px;
+}
+
+#card-container > .nes-container{
+  display: flex;
+  justify-content: space-between;
+  flex:auto;
+  height: auto;
+}
+
+.nes-container >p{
+  max-width: 85%;
+  overflow-wrap:break-word;
+}
+.background-done{
+  background-color: rgb(243, 243, 101);
+}
+
+body{
+  background-image: url('background.jpg');
+  position: center;
+}

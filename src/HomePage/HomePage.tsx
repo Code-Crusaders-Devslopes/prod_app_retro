@@ -10,7 +10,7 @@ const HomePage = () => {
             <p>000000</p>
           </div>
           <div className={styles.lives}>
-            <img src="" alt="Mushroom" />
+            <img src="4_20.jpg" alt="Mushroom" className={`${styles.icon}`}/>
             <p>X 00</p>
           </div>
           <div className={styles.world}>

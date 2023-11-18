@@ -8,6 +8,7 @@ import pause from '../../public/smb_pause.wav';
 import gameOver from '../../public/smb_mariodie.wav';
 import coinSound from '../../public/smb_coin.wav';
 import bump from '../../public/smb_bump.wav';
+import greatJob from '../../public/smb_powerup.wav'
 import { useEffect, useState } from 'react';
 import { completeTask } from '../api_calls/complete-task';
 import { createTask } from '../api_calls/create-task';
@@ -78,18 +79,18 @@ const TaskPage = () => {
     }
   };
 
-  const clearAll = async () => {
-    if (tasks.length == 0) {
-      const audio = new Audio(bump);
-      audio.play();
-      return;
-    }
+  const clearAll = async (skipSound = false) => {
     try {
+      if (tasks.length == 0) {
+        const audio = new Audio(bump);
+        audio.play();
+        return;
+      }
+      const audio = new Audio(gameOver);
+      audio.play();
       tasks.map((task: any) => {
         deleteTask(task.id);
       });
-      const audio = new Audio(gameOver);
-      audio.play();
       setTasks([]);
     } catch (e) {
       console.log(e);
@@ -181,6 +182,7 @@ const TaskPage = () => {
           </div>
         </div>
       </div>
+      {/* {showFlashingText && <div className={`${style.flashingText}`}>GREAT JOB</div>} */}
       <div
         id="card-container"
         className={`${style.widthFit} ${style.cardContainer}`}

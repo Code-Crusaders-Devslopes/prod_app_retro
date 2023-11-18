@@ -1,15 +1,22 @@
 .window{
   width: 65%;
-  margin: 100px auto 0;
+  /* margin: 100px auto 0; */
   display: flex;
+  /* overflow: hidden; */
 }
 .flexRow{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
 }
+
+.flexOne{
+  flex: 1;
+}
+
 
 .justifyContent{
   justify-content: center;
@@ -27,7 +34,9 @@
   background-color: rgb(243, 243, 101);
 
 }
-
+.widthFit{
+  max-width: 85%;
+}
 .maxWidthOut{
   width: 100%
 }
@@ -44,8 +53,9 @@
 .inputField{
   display: flex;
   gap: 20px;
-  width: 100%;
-  height: 50px;
+  width: 500px;
+  height: 65px;
+  margin-top: 20px;
 }
 
 button.nes-btn{
@@ -61,17 +71,23 @@ button.nes-btn{
 img.icon{
   width: 32px;
   height: 32px;
+  transition: transform .3s ease-in-out;
+}
+
+img.icon:hover{
+  transform: scale(1.2);
 }
 
 #card-container{
   display:flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
+
 .nes-container{background-color: white;}
 
-#card-container{
-  width: 625px;
+.max-width{
+  max-width: 85%;
 }
 
 #card-container > .nes-container{
@@ -81,15 +97,80 @@ img.icon{
   height: auto;
 }
 
-.nes-container >p{
-  max-width: 85%;
+.breakWord{
+  width: 100%;
   overflow-wrap:break-word;
+  text-align:left;
 }
 .background-done{
   background-color: rgb(243, 243, 101);
 }
 
+.taskPageBackground{
+  background-image: url('../../public/background.jpg');
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-attachment: scroll;
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.title{
+  font-size: 42px;
+  font-weight: bold;
+}
+
 body{
-  background-image: url('background.jpg');
-  position: center;
+  background-color: black;
+}
+
+.cardContainer{
+  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.clearButton{
+    float: left;
+    margin-top: 10px;
+}
+
+.modal{
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+.modalPanel{
+  display:flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  /* text-align:center; */
+  /* background-color: white; */
+  position: relative;
+  height: 100vh;
+  width: 500px;
+  background-color: transparent !important;
+}
+
+.inside{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.gap5{
+  display:flex;
+  gap: 5px;
 }

@@ -1,9 +1,7 @@
 import { supabase } from "../supabaseConfig";
 
 export const deleteSticky = async (id: number) => {
-  const { data, error } = await supabase.from("sticky").delete().eq("id", id);
-  if (data) {
-    return data;
-  }
+  const { error } = await supabase.from("stickies").delete().eq("id", id);
+
   return error?.message;
 };

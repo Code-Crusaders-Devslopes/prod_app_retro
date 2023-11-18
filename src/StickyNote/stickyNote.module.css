@@ -1,19 +1,86 @@
+.stickyBody {
+  background-color: black;
+  object-fit: cover;
+  background-image: url("wallhaven-vg52ql.png");
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-width: 100vw;
+
+}
 .container {
+
+  margin: 0 0;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+.formContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  width: 600px;
-  position: relative;
-  text-align: center;
-  gap: 20px;
-}
 
+  border: 1px solid;
+  padding: 1.2rem;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: black;
+  margin: 0 auto;
+}
+.formContainer label {
+  background: black;
+  padding: 2rem;
+}
+.formContainer input {
+  max-width: 100%;
+
+}
+.noteList{
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  width: 45%;
+  justify-content: center;
+  margin: 0 auto;
+}
+.sticky{
+  background: blue;
+  padding: 0.8rem;
+  margin: 1.2rem;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-wrap: anywhere;;
+}
+.btn {
+  border: 2px dashed white;
+}
 .homeButton {
   /* position: absolute; */
+  margin: 2rem;
 }
 
 .noteInput {
   height: 80px;
+}
+
+@media (max-width: 820px) {
+  .formContainer{
+    width: 80%;
+
+  }
+  .noteList{
+     width: 80%;
+
+   }
 }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import styles from './stickyNote.module.css';
+
 import { useEffect, useState } from 'react';
 import { createSticky } from '../api_calls/create-sticky';
 import { getStickies } from '../api_calls/get-stickies';
@@ -41,6 +42,7 @@ const StickyNote = () => {
   const deleteS = (value: any) => {
     try {
       deleteSticky(value);
+      fetchStickies()
       // const audio = new Audio(gameOver);
       // audio.play();
     } catch (e) {
@@ -51,7 +53,7 @@ const StickyNote = () => {
   const handleStickyAdd = async () => {
     try {
       await createS(title, note);
-      fetchStickies();
+      await fetchStickies();
       setTitle('');
       setNote('');
     } catch (e) {
@@ -60,48 +62,54 @@ const StickyNote = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <button className={styles.homeButton} onClick={() => navigate('/')}>
-        Home
-      </button>
-      <form>
-        <label htmlFor="note">Make A Super Duper Fun EX-TREME Note:</label>
-        <br />
-        <input
-          value={title}
-          placeholder="Title"
-          type="text"
-          name="noteTitle"
-          id="noteTitle"
-          onChange={(e: any) => setTitle(e.target.value)}
-        />
-        <br />
-        <br />
-        <input
-          className={styles.noteInput}
-          value={note}
-          placeholder="Note"
-          type="text"
-          name="noteContent"
-          id="noteContent"
-          onChange={(e: any) => setNote(e.target.value)}
-        />
-        <br />
-        <br />
-        <button type="button" value="Submit" onClick={() => handleStickyAdd()}>
-          Add Note
+      <div className={styles.stickyBody}>
+        <button className={`${styles.homeButton} ${styles.btn}`} onClick={() => navigate('/')}>
+          Home
         </button>
-      </form>
-      {stickies.map((note: any) => (
-        <>
-          <h3>Title:{note.title}</h3>
-          <p>{note.note}</p>
-          <button type="button" onClick={() => deleteS(note.id)}>
-            X
-          </button>
-        </>
-      ))}
-    </div>
+        <div className={styles.container}>
+
+          <form className={styles.formContainer}>
+            <label htmlFor="note">Make An EX-TREME Note:</label>
+            <br/>
+            <input
+                value={title}
+                placeholder="Title"
+                type="text"
+                name="noteTitle"
+                id="noteTitle"
+                onChange={(e: any) => setTitle(e.target.value)}
+            />
+            <br/>
+            <br/>
+            <input
+                className={styles.noteInput}
+                value={note}
+                placeholder="Note"
+                type="text"
+                name="noteContent"
+                id="noteContent"
+                onChange={(e: any) => setNote(e.target.value)}
+            />
+            <br/>
+            <br/>
+            <button className={styles.btn} type="button" value="Submit" onClick={() => handleStickyAdd()}>
+              Add Note
+            </button>
+          </form>
+          {stickies.map((note: any) => (
+              <div className={styles.sticky}>
+                <h3>Title:{note.title}</h3>
+                <p>{note.note}</p>
+                <button className={styles.btn} type="button" onClick={() => deleteS(note.id)}>
+                  X
+                </button>
+              </div>
+          ))}
+
+
+        </div>
+      </div>
+
   );
 };
 export default StickyNote;

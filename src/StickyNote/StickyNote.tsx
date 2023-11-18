@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { createSticky } from "../api_calls/create-sticky";
-import { getStickies } from "../api_calls/get-stickies";
+import { useEffect, useState } from 'react';
+import { createSticky } from '../api_calls/create-sticky';
+import { getStickies } from '../api_calls/get-stickies';
 
 type note = {
   title: string;
@@ -12,11 +12,11 @@ type note = {
 //   //handleNotes: (noteInput: note) => void;
 // };
 const StickyNote = () => {
-  const [note, setNote] = useState<note>({ title: "", content: "", id: 0 });
+  const [note, setNote] = useState<note>({ title: '', content: '', id: 0 });
   const [currentTask, setCurrentTask] = useState<any>([]);
 
   useEffect(() => {
-    fetchTasks();
+    // fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
@@ -83,14 +83,14 @@ const StickyNote = () => {
         <input type="submit" value="Submit" />
       </form>
       <div className="notes">
-        {notes?.map((note) => {
+        {/* {notes?.map((note) => {
           return (
             <>
               <h3>Title: {note.title}</h3>
               <p>{note.content}</p>
             </>
           );
-        })}
+        })} */}
       </div>
     </>
   );

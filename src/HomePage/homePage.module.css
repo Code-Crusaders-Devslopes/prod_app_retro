@@ -1,39 +1,52 @@
-.window{
-  width: 65%;
-  margin: 100px auto 0;
+.header {
   display: flex;
+  justify-content: space-around;
 }
-
-.main{
+.player,
+.world,
+.time {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+p {
+  color: white;
+}
+.lives {
+  display: flex;
+  gap: 5px;
+  color: white;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('https://wallpapercave.com/wp/wp6099400.png');
+  background-size: 83%;
+  background-repeat: none;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  padding: 40px;
+}
+.yes,
+.no {
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+}
+.hpbuttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 100px;
+  gap: 50px;
 }
-
-.input-field{
-  display: flex;
-  gap: 20px;
-}
-
-button.nes-btn{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.input-field *{
-  flex: 1;
-}
-
-img.icon{
-  width: 32px;
-  height: 32px;
-}
-#card-container > .nes-container{
-  min-width: 500px;
-}
-
-.background-done{
-  background-color: rgb(243, 243, 101);
+.hpbuttons a {
+  color: darkblue;
+  font-size: 25px;
 }

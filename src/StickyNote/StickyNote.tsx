@@ -96,6 +96,9 @@ const StickyNote = () => {
         <>
           <h3>Title:{note.title}</h3>
           <p>{note.note}</p>
+          <button type="button" onClick={() => deleteS(note.id)}>
+            X
+          </button>
         </>
       ))}
     </div>

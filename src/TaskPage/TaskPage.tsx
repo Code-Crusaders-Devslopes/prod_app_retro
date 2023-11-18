@@ -14,14 +14,17 @@ import { createTask } from '../api_calls/create-task';
 import { deleteTask } from '../api_calls/delete-task';
 import { getTasks } from '../api_calls/get-tasks';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 declare module 'react-modal';
 // import backgroundMusic from '../../public/underworld.mp3';
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState<any>([]);
-  const [currentTask, setCurrentTask] = useState<any>([]);
+  const [currentTask, setCurrentTask] = useState<any>(null);
   // const [isCompleted, setIsCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTasks();
@@ -76,7 +79,7 @@ const TaskPage = () => {
   };
 
   const clearAll = async () => {
-    if(tasks.length == 0){
+    if (tasks.length == 0) {
       const audio = new Audio(bump);
       audio.play();
       return;
@@ -95,7 +98,8 @@ const TaskPage = () => {
 
   const handleTaskAdd = async () => {
     // put functionality here
-    if (!currentTask.trim() || (!currentTask.trim() && tasks.length == 0)) {
+    // if (!currentTask.trim() || (!currentTask.trim() && tasks.length == 0)) {
+    if (!currentTask) {
       setIsModalOpen(true);
       const audio = new Audio(pause);
       audio.play();
@@ -119,7 +123,6 @@ const TaskPage = () => {
   return (
     <>
       <div className={`${style.taskPageBackground}`}></div>
-
       <div
         className={`${style.backgroundColorWhite} ${style.widthFit} nes-container with-title`}
       >
@@ -127,7 +130,11 @@ const TaskPage = () => {
         <p>Enter a task</p>
 
         <div>
-          <a onMouseOver={returnMouseOver} onMouseOut={returnMouseOut} href="/">
+          <a
+            onMouseOver={returnMouseOver}
+            onMouseOut={returnMouseOut}
+            onClick={() => navigate('/')}
+          >
             Home
           </a>
         </div>
@@ -167,8 +174,9 @@ const TaskPage = () => {
             } ${style.icon} nes-container ${style.flexRow}`}
           >
             <div className={`${style.widthFit}`}>
-              <p className={`${style.breakWord}`}
-              style={{color: "black"}}>{x.task}</p>
+              <p className={`${style.breakWord}`} style={{ color: 'black' }}>
+                {x.task}
+              </p>
             </div>
 
             <div className={`${style.gap5}`}>
@@ -203,8 +211,8 @@ const TaskPage = () => {
         style={{ overlay: { backgroundColor: 'transparent' } }}
         isOpen={isModalOpen}
       >
-        <div className={`${style.modalPanel}`}>
-          <div className={`${style.inside}`}>
+        <div className={style.modalPanel}>
+          <div className={style.inside}>
             <h2>I know you have a lot to do</h2>
             <button onClick={() => setIsModalOpen(false)}>stfu</button>
           </div>

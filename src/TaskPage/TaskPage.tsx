@@ -8,7 +8,6 @@ import pause from '../../public/smb_pause.wav';
 import gameOver from '../../public/smb_mariodie.wav';
 import coinSound from '../../public/smb_coin.wav';
 import bump from '../../public/smb_bump.wav';
-import greatJob from '../../public/smb_powerup.wav'
 import { useEffect, useState } from 'react';
 import { completeTask } from '../api_calls/complete-task';
 import { createTask } from '../api_calls/create-task';
@@ -17,12 +16,10 @@ import { getTasks } from '../api_calls/get-tasks';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 declare module 'react-modal';
-// import backgroundMusic from '../../public/underworld.mp3';
 
 const TaskPage = () => {
   const [tasks, setTasks] = useState<any>([]);
   const [currentTask, setCurrentTask] = useState<any>(null);
-  // const [isCompleted, setIsCompleted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -79,7 +76,7 @@ const TaskPage = () => {
     }
   };
 
-  const clearAll = async (skipSound = false) => {
+  const clearAll = async () => {
     try {
       if (tasks.length == 0) {
         const audio = new Audio(bump);
@@ -122,10 +119,10 @@ const TaskPage = () => {
       coin.play();
       await createT(currentTask);
       await fetchTasks();
-      
+
       // Play the sound
       // Clear the input field
-    }else if(e.key === 'Enter' && currentTask.trim() === ''){
+    } else if (e.key === 'Enter' && currentTask.trim() === '') {
       setIsModalOpen(true);
       const audio = new Audio(pause);
       audio.play();

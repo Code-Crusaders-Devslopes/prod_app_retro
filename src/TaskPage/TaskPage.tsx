@@ -1,21 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useEffect, useState } from 'react';
 import style from './taskPage.module.css';
 import stomp from '../../public/smb_stomp.wav';
 import oneUp from '../../public/smb_1-up.wav';
 import pause from '../../public/smb_pause.wav';
+import gameOver from '../../public/smb_mariodie.wav';
+import coinSound from '../../public/smb_coin.wav';
+import bump from '../../public/smb_bump.wav';
+import { useEffect, useState } from 'react';
 import { completeTask } from '../api_calls/complete-task';
 import { createTask } from '../api_calls/create-task';
 import { deleteTask } from '../api_calls/delete-task';
 import { getTasks } from '../api_calls/get-tasks';
-import coinSound from '../../public/smb_coin.wav';
 import Modal from 'react-modal';
 declare module 'react-modal';
-// import gameOver from '../../public/smb_gameover.wav'
-// import gameOver from '../../public/smb_gameover.wav'
-// import gameOver from '../../public/smb_mariodie.wav';
 // import backgroundMusic from '../../public/underworld.mp3';
 
 const TaskPage = () => {
@@ -77,6 +76,11 @@ const TaskPage = () => {
   };
 
   const clearAll = async () => {
+    if(tasks.length == 0){
+      const audio = new Audio(bump);
+      audio.play();
+      return;
+    }
     try {
       tasks.map((task: any) => {
         deleteTask(task.id);
@@ -97,6 +101,7 @@ const TaskPage = () => {
       audio.play();
       return;
     }
+    setCurrentTask('');
     const audio = new Audio(coinSound);
     audio.play();
     await createT(currentTask);
@@ -162,7 +167,8 @@ const TaskPage = () => {
             } ${style.icon} nes-container ${style.flexRow}`}
           >
             <div className={`${style.widthFit}`}>
-              <p className={`${style.breakWord}`}>{x.task}</p>
+              <p className={`${style.breakWord}`}
+              style={{color: "black"}}>{x.task}</p>
             </div>
 
             <div className={`${style.gap5}`}>

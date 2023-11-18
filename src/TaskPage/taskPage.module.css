@@ -132,6 +132,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-width: 570px;
 }
 
 .clearButton{
@@ -173,4 +174,8 @@ body{
 .gap5{
   display:flex;
   gap: 5px;
+}
+
+.addMargin{
+  margin-left:500px;
 }

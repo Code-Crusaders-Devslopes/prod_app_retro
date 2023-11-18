@@ -119,7 +119,7 @@ const TaskPage = () => {
   return (
     <>
       <div className={`${style.taskPageBackground}`}></div>
-      
+
       <div
         className={`${style.backgroundColorWhite} ${style.widthFit} nes-container with-title`}
       >

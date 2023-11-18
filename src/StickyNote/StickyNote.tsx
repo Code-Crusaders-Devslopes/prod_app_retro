@@ -1,19 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import styles from './stickyNote.module.css';
 import { useEffect, useState } from 'react';
 import { createSticky } from '../api_calls/create-sticky';
 import { getStickies } from '../api_calls/get-stickies';
 import { deleteSticky } from '../api_calls/delete-sticky';
+import { useNavigate } from 'react-router-dom';
 
-type note = {
-  title: string;
-  content: string;
-  id: number;
-};
-// type StickyProps = {
-//   //noteArr: note[] | null;
-//   //handleNotes: (noteInput: note) => void;
-// };
 const StickyNote = () => {
-  const [note, setNote] = useState<note>({ title: '', content: '', id: 0 });
+  const [title, setTitle] = useState<string>('');
+  const [note, setNote] = useState<string>('');
+  const [stickies, setStickies] = useState<any>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchStickies();
@@ -21,74 +20,85 @@ const StickyNote = () => {
 
   const fetchStickies = async () => {
     try {
-      await getStickies().then((data) => {
-        setNote(data);
-        console.log(stickies);
-      });
+      const data = await getStickies();
+      // console.log(data);
+
+      setStickies(data);
+      console.log(stickies);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const createS = async (value) => {
+  const createS = async (title: string, note: string) => {
     try {
-      await createSticky(value);
+      await createSticky(title, note);
     } catch (e) {
       console.log(e);
     }
   };
-
-  // const completeT = (id: any) => {
-  //   try {
-  //     completeSticky(id);
-  //     const audio = new Audio(oneUp);
-  //     audio.play();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const deleteS = (value: any) => {
     try {
       deleteSticky(value);
-      const audio = new Audio(gameOver);
-      audio.play();
+      // const audio = new Audio(gameOver);
+      // audio.play();
     } catch (e) {
       console.log(e);
     }
   };
+
   const handleStickyAdd = async () => {
-    // put functionality here
-    await createS(note);
-    // await fetchTasks();
+    try {
+      await createS(title, note);
+      fetchStickies();
+      setTitle('');
+      setNote('');
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
-    <>
-      <form onSubmit={(e) => e.preventDefault()}>
+    <div className={styles.container}>
+      <button className={styles.homeButton} onClick={() => navigate('/')}>
+        Home
+      </button>
+      <form>
         <label htmlFor="note">Make A Super Duper Fun EX-TREME Note:</label>
+        <br />
         <input
+          value={title}
+          placeholder="Title"
           type="text"
           name="noteTitle"
           id="noteTitle"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(e.target.value);
-            setNote((e) => e.target.value);
-          }}
+          onChange={(e: any) => setTitle(e.target.value)}
         />
-        <input type="text" name="noteContent" id="noteContent" />
-        <input type="submit" value="Submit" />
+        <br />
+        <br />
+        <input
+          className={styles.noteInput}
+          value={note}
+          placeholder="Note"
+          type="text"
+          name="noteContent"
+          id="noteContent"
+          onChange={(e: any) => setNote(e.target.value)}
+        />
+        <br />
+        <br />
+        <button type="button" value="Submit" onClick={() => handleStickyAdd()}>
+          Add Note
+        </button>
       </form>
-      <div className="notes">
-        {/* {notes?.map((note) => {
-          return (
-            <>
-              <h3>Title: {note.title}</h3>
-              <p>{note.content}</p>
-            </>
-          );
-        })} */}
-      </div>
-    </>
+      {stickies.map((note: any) => (
+        <>
+          <h3>Title:{note.title}</h3>
+          <p>{note.note}</p>
+        </>
+      ))}
+    </div>
   );
 };
 export default StickyNote;

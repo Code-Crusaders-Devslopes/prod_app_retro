@@ -1,13 +1,13 @@
-import { supabase } from "../supabaseConfig";
+import { supabase } from '../supabaseConfig';
 
-type Sticky = {
-  id: number;
+export type Sticky = {
+  id?: number;
   title: string;
-  content: string;
+  note: string;
 };
 
-export const createSticky = async (sticky: Sticky) => {
-  const { error } = await supabase.from("sticky").insert({ sticky });
+export const createSticky = async (title: string, note: string) => {
+  const { error } = await supabase.from('stickies').insert({ title, note });
 
   if (error) {
     return error?.message;

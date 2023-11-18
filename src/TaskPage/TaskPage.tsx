@@ -112,6 +112,25 @@ const TaskPage = () => {
     await fetchTasks();
   };
 
+  const handleKeyPress = async (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && currentTask.trim() !== '') {
+      e.preventDefault();
+      // Add the new card
+      setCurrentTask('');
+      const coin = new Audio(coinSound);
+      coin.play();
+      await createT(currentTask);
+      await fetchTasks();
+      
+      // Play the sound
+      // Clear the input field
+    }else if(e.key === 'Enter' && currentTask.trim() === ''){
+      setIsModalOpen(true);
+      const audio = new Audio(pause);
+      audio.play();
+    }
+  };
+
   const returnMouseOver = (e: any) => {
     e.target.innerText = `WHERE DO YOU THINK YOU'RE GOING?`;
   };
@@ -147,6 +166,7 @@ const TaskPage = () => {
                 type="text"
                 id="input-box"
                 className={`${style.maxWidthOut} ${style.alignItems} nes.nes-input`}
+                onKeyPress={handleKeyPress}
               ></input>
               <button
                 onClick={() => handleTaskAdd()}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createSticky } from '../api_calls/create-sticky';
 import { getStickies } from '../api_calls/get-stickies';
+import { deleteSticky } from '../api_calls/delete-sticky';
 
 type note = {
   title: string;
@@ -13,13 +14,12 @@ type note = {
 // };
 const StickyNote = () => {
   const [note, setNote] = useState<note>({ title: '', content: '', id: 0 });
-  const [currentTask, setCurrentTask] = useState<any>([]);
 
   useEffect(() => {
-    // fetchTasks();
+    fetchStickies();
   }, []);
 
-  const fetchTasks = async () => {
+  const fetchStickies = async () => {
     try {
       await getStickies().then((data) => {
         setNote(data);
@@ -30,7 +30,7 @@ const StickyNote = () => {
     }
   };
 
-  const createT = async (value) => {
+  const createS = async (value) => {
     try {
       await createSticky(value);
     } catch (e) {
@@ -38,17 +38,17 @@ const StickyNote = () => {
     }
   };
 
-  const completeT = (id: any) => {
-    try {
-      completeSticky(id);
-      const audio = new Audio(oneUp);
-      audio.play();
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const completeT = (id: any) => {
+  //   try {
+  //     completeSticky(id);
+  //     const audio = new Audio(oneUp);
+  //     audio.play();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-  const deleteT = (value: any) => {
+  const deleteS = (value: any) => {
     try {
       deleteSticky(value);
       const audio = new Audio(gameOver);
@@ -57,12 +57,10 @@ const StickyNote = () => {
       console.log(e);
     }
   };
-  const handleTaskAdd = async () => {
+  const handleStickyAdd = async () => {
     // put functionality here
-    const audio = new Audio(coinSound);
-    audio.play();
-    await createT(currentTask);
-    await fetchTasks();
+    await createS(note);
+    // await fetchTasks();
   };
   return (
     <>
@@ -74,9 +72,7 @@ const StickyNote = () => {
           id="noteTitle"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             console.log(e.target.value);
-            setNote((noteTitle) => {
-              note.title = noteTitle;
-            });
+            setNote((e) => e.target.value);
           }}
         />
         <input type="text" name="noteContent" id="noteContent" />

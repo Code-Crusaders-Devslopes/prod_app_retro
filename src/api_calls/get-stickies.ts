@@ -1,7 +1,7 @@
-import { supabase } from "../supabaseConfig";
+import { supabase } from '../supabaseConfig';
 
 export const getStickies = async () => {
-  const { data, error } = await supabase.from("stickies").select("*");
+  const { data, error } = await supabase.from('stickys').select('*');
 
   console.log(data);
 

@@ -1,18 +1,12 @@
 import React from "react";
 
-interface CalendarProps {
-  currentDate: Date;
-  daysOfWeek: string[];
-  startDay: number; // 0 for Sunday, 1 for Monday, and so on
-}
-
-export const Calendar: React.FC<CalendarProps> = ({
-  currentDate,
-  daysOfWeek,
-  startDay,
-}) => {
+export const Calendar: React.FC = ({}) => {
+  const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
+
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const startDay = 0;
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
   const startingDay = (firstDayOfMonth.getDay() - startDay + 7) % 7;

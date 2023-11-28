@@ -7,9 +7,6 @@ import StickyNote from "./StickyNote/StickyNote";
 import { Calendar } from "./Calendar/Calendar";
 
 function App() {
-  const currentDate = new Date();
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const startDay = 0;
   return (
     <>
       <BrowserRouter>
@@ -17,16 +14,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/taskpage" element={<TaskPage />} />
           <Route path="/sticky-note" element={<StickyNote />} />
-          <Route
-            path="/calendar"
-            element={
-              <Calendar
-                currentDate={currentDate}
-                daysOfWeek={daysOfWeek}
-                startDay={startDay}
-              />
-            }
-          />
+          <Route path="/calendar" element={<Calendar />} />
         </Routes>
       </BrowserRouter>
     </>
